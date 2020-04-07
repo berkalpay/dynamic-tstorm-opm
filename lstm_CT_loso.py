@@ -19,8 +19,8 @@ import matplotlib
 matplotlib.use("agg")
 import matplotlib.pyplot as plt
 
-calib_path = './data/calibs/Calib_hrrrHourly_summerCT_townFeat_totCounts_withREFD_2016-07-15--2018-09-30_filled.csv'
-results_path = './results/lstm_predictions.csv'
+calib_path = './data/Calib_hrrrHourly_summerCT_townFeat_totCounts.csv'
+results_path = './lstm_predictions.csv'
 events_path = './data/tStormList_18hr_CT_2016+.csv'
 
 STORM_DURATION = 18
