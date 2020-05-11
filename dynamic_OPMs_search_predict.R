@@ -39,9 +39,9 @@ lagOutageDF <- function(d, lag) {
 
 lag <- 1
 
-#########
-## GLM ##
-#########
+########################
+## Poisson regression ##
+########################
 
 set.seed(42)
 storm_pred <- c()
@@ -147,7 +147,7 @@ pred_df$lstm <- read.csv("results/LSTM_pred.csv")$Predicted
 write.csv(pred_df, pred_out_path, row.names=F) # Checkpoint
 
 ########################
-## (import) UConn-OPM ##
+## (import) Event-OPM ##
 ########################
 
 tot_preds <- read.csv("results/EventOPM_pred.csv")$avgTS
