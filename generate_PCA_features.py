@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import numpy as np
 from sklearn.pipeline import make_pipeline
 
-calib_path = 'data/calibs/Calib_hrrrHourly_summerCT_townFeat_totCounts.csv'
+calib_path = 'data/Calib_hrrrHourly_summerCT_townFeat_totCounts.csv'
 events_path = 'data/tStormList_18hr_CT_2016+.csv'
 
 STORM_DURATION = 18
@@ -76,4 +76,4 @@ for eventNum, eventDT in enumerate(eventDTs):
     df_pca.index = df.index
     df_pca.columns = ["PC"+str(i) for i in range(1,101)]
     df_pca["countts"] = df["countts"]
-    df_pca.to_csv("data/LOSO/Calib_hrrrHourly_summerCT_townFeat_totCounts_withREFD_2016-07-15--2018-09-30_withoutTornado_filled_LSTMfeat_{:02}.csv".format(eventNum+1))
+    df_pca.to_csv("data/LOSO/Calib_hrrrHourly_summerCT_townFeat_totCounts_storm{:02}.csv".format(eventNum+1))
