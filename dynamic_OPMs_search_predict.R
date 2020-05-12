@@ -1,8 +1,7 @@
 library(caret)
 library(ranger)
 
-df_list <- lapply(list.files("data/calibs/LOSO/", full.names=T),
-                  read.csv, row.names=1)
+df_list <- lapply(list.files("data/LOSO/", full.names=T), read.csv, row.names=1)
 an_df <- read.csv("data/storm_hours_outages.csv")
 an_df$dateTime <- as.character(an_df$dateTime)
 
@@ -46,8 +45,6 @@ lag <- 1
 set.seed(42)
 storm_pred <- c()
 for(i in 0:26) {
-  print(i)
-  
   df <- lagOutageDF(df_list[[i+1]], lag)
   storm_hours <- an_df$dateTime[(i*18+1):((i+1)*18)]
   
@@ -70,14 +67,12 @@ for(k in search_grid) {
   
   h_cor <- c()
   for(i in 0:26) {
-    #print(i)
     df <- lagOutageDF(df_list[[i+1]], lag)
     storm_hours <- an_df$dateTime[(i*18+1):((i+1)*18)]
     fit <- knnreg(countts ~., df[!(rownames(df) %in% storm_hours),], k=k)
     pred <- predict(fit, df[rownames(df) %in% storm_hours,])
     h_cor <- c(h_cor, cor(pred_df[pred_df$sid==i,]$countts, pred)^2)
   }
-  print(mean(h_cor))
   hourly_cors <- c(hourly_cors, mean(h_cor))
   
 }
@@ -109,7 +104,6 @@ for(ntree in search_grid) {
   
   h_cor <- c()
   for(i in 0:26) {
-    print(i)
     df <- lagOutageDF(df_list[[i+1]], lag)
     storm_hours <- an_df$dateTime[(i*18+1):((i+1)*18)]
     fit <- ranger(countts ~., df[!(rownames(df) %in% storm_hours),],
@@ -117,7 +111,6 @@ for(ntree in search_grid) {
     pred <- predict(fit, df[rownames(df) %in% storm_hours,])$predictions
     h_cor <- c(h_cor, cor(pred_df[pred_df$sid==i,]$countts, pred)^2)
   }
-  print(mean(h_cor))
   hourly_cors <- c(hourly_cors, mean(h_cor))
   
 }
