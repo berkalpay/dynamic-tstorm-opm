@@ -90,7 +90,7 @@ storm_pred <- c()
 for(i in 0:26) {
   df <- lagOutageDF(df_list[[i+1]], lag)
   storm_hours <- an_df$dateTime[(i*18+1):((i+1)*18)]
-  fit <- knnreg(countts ~., df[!(rownames(df) %in% storm_hours),], k=76)
+  fit <- knnreg(countts ~., df[!(rownames(df) %in% storm_hours),], k=74)
   storm_pred <- c(storm_pred,
                   predict(fit, df[rownames(df) %in% storm_hours,]))
 }
