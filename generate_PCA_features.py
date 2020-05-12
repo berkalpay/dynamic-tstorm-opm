@@ -10,9 +10,9 @@ events_path = 'data/tStormList_18hr_CT_2016+.csv'
 
 STORM_DURATION = 18
 
-################################
-##--PROCESS CALIBRATION FILE--##
-################################
+##############################
+## PROCESS CALIBRATION FILE ##
+##############################
 
 print('\n\n...processing calib...')
 dataset = pd.read_csv(calib_path)
@@ -36,9 +36,9 @@ df = df.loc[intStartDT:intEndDT]
 DTs = [dt for dt in DTs if intStartDT <= int(datetime.strftime(dt, "%Y%m%d%H")) <= intEndDT]
 print('Length of time series: ', len(DTs))
 
-###########################
-##--PROCESS EVENTS FILE--##
-###########################
+#########################
+## PROCESS EVENTS FILE ##
+#########################
 
 # Select event DTs
 print('\n...processing events...')
@@ -55,9 +55,9 @@ eventDTs = [datetime.strptime(strDT, "%m/%d/%Y %H") for strDT in strEventDTs]
 startDT, endDT = datetime.strptime(str(intStartDT), "%Y%m%d%H"), datetime.strptime(str(intEndDT), "%Y%m%d%H")
 eventDTs = [dt for dt in eventDTs if startDT <= dt <= endDT]
 
-###########
-##--PCA--##
-###########
+#########
+## PCA ##
+#########
 
 for eventNum, eventDT in enumerate(eventDTs):
     print("Saving PCA for training set of", eventNum, eventDT)
