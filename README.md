@@ -12,7 +12,7 @@ To produce LOSO cross-validated predictions from the LSTM, run
 python3 lstm_CT_loso.py
 ```
 
-To perform the hyperparameter searches and produce predictions from the Poisson regression, KNN, and random forest models, run
+To produce the LOSO cross-validated hyperparameter searches and predictions from the Poisson regression, KNN, and random forest models, run
 ```{bash}
 Rscript dynamic_OPMs_search_predict.R
 ```
